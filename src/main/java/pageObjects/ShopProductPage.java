@@ -12,7 +12,6 @@ public class ShopProductPage {
 	By quantityDecrease = By.cssSelector(".touchspin-down");
 	By quantityWanted = By.cssSelector("#quantity_wanted");
 	By addToCartBtn = By.cssSelector(".add-to-cart");
-
 	By homepageLink = By.xpath("//span[text()='Home']");
 
 	public ShopProductPage(WebDriver driver) {
@@ -37,5 +36,9 @@ public class ShopProductPage {
 
 	public WebElement getAddToCartBtn() {
 		return driver.findElement(addToCartBtn);
+	}
+
+	public WebElement getHomePageLink() {
+		return driver.findElement(homepageLink);
 	}
 }
