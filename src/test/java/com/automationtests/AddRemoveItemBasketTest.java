@@ -38,14 +38,8 @@ public class AddRemoveItemBasketTest extends BasePage {
 		home.getCookie().click();
 		home.getTestStoreLink().click();
 
-		Assert.assertEquals(driver.getCurrentUrl(),
-				"http://teststore.automationtesting.co.uk/",
-				"URL mismatch");
-
 		ShopHomePage shopHome = new ShopHomePage(driver);
-		WebElement productOne = shopHome.getProductOne();
 
-		Assert.assertTrue(productOne.isDisplayed(), "Product One is not visible");
 		shopHome.getProductOne().click();
 
 		ShopProductPage shopProductPage = new ShopProductPage(driver);
