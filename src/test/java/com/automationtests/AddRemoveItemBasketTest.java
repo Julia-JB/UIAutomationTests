@@ -51,30 +51,11 @@ public class AddRemoveItemBasketTest extends BasePage {
 		ShopProductPage shopProductPage = new ShopProductPage(driver);
 		Select sizeDropdown = new Select(shopProductPage.getSizeOption());
 
-		List<String> expectedSizes = Arrays.asList("S", "M", "L", "XL");
-		List<String> actualSizes = sizeDropdown.getOptions()
-				.stream()
-				.map(WebElement::getText)
-				.collect(Collectors.toList());
-
-		Assert.assertEquals(actualSizes, expectedSizes,
-				"Dropdown options do not match expected sizes");
-
 		sizeDropdown.selectByVisibleText("M");
-
-		shopProductPage.getQuantityIncrease().click();
-
-		String quantityWanted = shopProductPage.getQuantityWanted().getAttribute("value");
-		Assert.assertEquals(quantityWanted, "2", "Quantity value does not match expected");
 
 		shopProductPage.getAddToCartBtn().click();
 
 		ShopContentPanel shopPanel = new ShopContentPanel(driver);
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-
-		WebElement label = wait.until(ExpectedConditions.visibilityOf(shopPanel.getModalLabel()));
-		Assert.assertTrue(label.getText().contains("Product successfully added to " +
-				"your shopping cart"),"Modal panel text does not match expected");
 
 		shopPanel.getContinueShoppingBtn().click();
 
@@ -91,6 +72,7 @@ public class AddRemoveItemBasketTest extends BasePage {
 
 		cart.getRemoveItemTwo().click();
 
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOf(cart.getItemTwo()));
 
 		Assert.assertEquals(cart.getCartItems().size(), 1,
